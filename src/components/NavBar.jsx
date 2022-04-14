@@ -1,11 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import AuthModal from "./AuthModal";
 import AuthContext from "../contexts/AuthContext";
 import { NavLink } from "react-router-dom";
 
 function NavBar() {
-  const [showModal, setShowModal] = useState(false);
   const { activeUser, onLogout } = useContext(AuthContext);
   return (
     <Navbar bg="primary" variant="dark">
@@ -24,8 +22,8 @@ function NavBar() {
         </Nav>
         <Nav className="ms-auto">
           {!activeUser && (
-            <Nav.Link onClick={() => setShowModal(true)} to="#" as={NavLink}>
-              LogIn/SignUp
+            <Nav.Link to="#" as={NavLink}>
+              Welcome
             </Nav.Link>
           )}
           {activeUser && (
@@ -35,7 +33,6 @@ function NavBar() {
           )}
         </Nav>
       </Container>
-      <AuthModal show={showModal} onClose={() => setShowModal(false)} />
     </Navbar>
   );
 }

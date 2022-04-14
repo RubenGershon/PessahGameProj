@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 function SignUp({ closeModal }) {
   const { onSignUp } = useContext(AuthContext);
   const [firstName, setFirstName] = useState("");
+  const [nickName, setnickName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -35,6 +36,15 @@ function SignUp({ closeModal }) {
     <>
       <h5 className="display-5">Create a new acount!</h5>
       <Form>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>NickName</Form.Label>
+          <Form.Control
+            type="name"
+            placeholder="Enter a NickName"
+            value={nickName}
+            onChange={(e) => setnickName(e.target.value)}
+          />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>First Name</Form.Label>
           <Form.Control
