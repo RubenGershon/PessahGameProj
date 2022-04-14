@@ -11,6 +11,7 @@ function SignUp({ closeModal }) {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPwd] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [signUpErr, setSignUpErr] = useState("");
   const navigate = useNavigate();
 
@@ -88,8 +89,8 @@ function SignUp({ closeModal }) {
           <Form.Control
             type="password"
             placeholder="Re-type your Password"
-            value={password}
-            onChange={(e) => setPwd(e.target.value)}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </Form.Group>
         {signUpErr && (
