@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
 
 function HomePage() {
   return (
@@ -12,6 +12,12 @@ function HomePage() {
         You can press the button (no button yet) to start a new game and you
         will be redirected to the /games page!
       </Alert>
+      <Button
+        variant="outline-primary"
+        type="button"
+      >
+        Start the Game!!!!
+      </Button>
     </>
   );
 }
