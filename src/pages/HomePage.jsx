@@ -18,11 +18,11 @@ function HomePage() {
         Start the Game!!!!
       </Button>
   
-        <Row>
-      <Col xs lg="5 px-5" ><div className="imgTest header text rps"></div> </Col>
+        <Row className="justify-content-md-center">
+      <Col xs lg="5 px-5" ><div className="imgTest header text rps "></div> </Col>
       </Row>
   
-      <Row>
+      <Row className="justify-content-md-center">
         {/* <div className="testt"> */}
         <Col xs lg="5 px-5"><div className="imgTest header text tetris"></div> </Col>
         {/* </div> */}
