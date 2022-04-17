@@ -7,12 +7,20 @@ import NotFoundPage from "./pages/NotFoundPage";
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthProvider from "./components/AuthProvider";
+import React, { useState } from "react";
+import Play from "./components/Play";
+import Header from "./components/Header";
+import Game from "./components/Game";
 
 function App() {
+  const [myChoice, setMyChoice] = useState("");
+  const [score, setScore] = useState(0);
+
   return (
     <div style={{ height: "100%" }}>
       <AuthProvider>
         <NavBar />
+         <Header score={score} />
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route
@@ -23,12 +31,21 @@ function App() {
               </ProtectedRoute>
             }
           />
+     
           <Route
-            path="/games"
+            path="/game"
             element={
-              <ProtectedRoute>
-                <GamesPage />
-              </ProtectedRoute>
+              // <ProtectedRoute>
+                 <Play setMyChoice={setMyChoice}/>
+              // </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/play"
+            element={
+              // <ProtectedRoute>
+                <Game myChoice={myChoice} score={score} setScore={setScore}/>
+              // </ProtectedRoute>
             }
           />
           <Route
