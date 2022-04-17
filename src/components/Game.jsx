@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../scss/game.scss";
 import "../scss/header.scss";
+import Header from "./Header";
 // import { Alert } from "react-bootstrap";
 
 
@@ -58,8 +60,9 @@ const Game = ({ score, setScore, myChoice }) => {
   }, [counter, house]);
 
   return (
-    <div className="game">
-      {/* <Alert variant="info">Welcome to the Game Page!!!</Alert> */}
+      <Container>
+        <Header score={score} />
+      <div className="game">
       <div className="game__you">
         <span className="gameHeaderCtl"> You Picked</span>
         <div className={`icon icon--${myChoice}`}></div>
@@ -105,6 +108,7 @@ const Game = ({ score, setScore, myChoice }) => {
 
    
     </div>
+    </Container>
   )
 }
 

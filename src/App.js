@@ -20,7 +20,7 @@ function App() {
     <div style={{ height: "100%" }}>
       <AuthProvider>
         <NavBar />
-         <Header score={score} />
+         {/* <Header score={score} /> */}
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route

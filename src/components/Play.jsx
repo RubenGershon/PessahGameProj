@@ -4,6 +4,8 @@ import Triangle from "../images/bg-triangle.svg";
 import "../scss/play.scss";
 import "../scss/header.scss";
 import "../scss/game.scss";
+import { Container } from "react-bootstrap";
+
 
 const Play = ({ setMyChoice }) => {
   const setChoice = (e) => {
@@ -11,7 +13,14 @@ const Play = ({ setMyChoice }) => {
   };
 
   return (
+      <Container>
+    <div className="text title">
+        <span>Rock</span>
+        <span>Paper</span>
+        <span>Scissors</span>
+      </div>
     <div className="play">
+        
       <img src={Triangle} className="triangle" alt="triangle" />
       <div className="items">
         <Link to="/play">
@@ -37,6 +46,7 @@ const Play = ({ setMyChoice }) => {
         </Link>
       </div>
     </div>
+    </Container>
   );
 };
 
