@@ -22,8 +22,8 @@ function WelcomePage() {
       await onLogin(email, pwd);
       navigate("/home");
     } catch (err) {
-      console.log(err);
-      setIsLoginError(true);
+      console.log(err.response.data);
+      setIsLoginError(err.response.data.message);
     } finally {
       setIsLoggingIn(false);
     }
@@ -57,11 +57,7 @@ function WelcomePage() {
               onChange={(e) => setPwd(e.target.value)}
             />
           </Form.Group>
-          {isLoginError && (
-            <Alert variant="danger">
-              Login error! Incorrect username or password
-            </Alert>
-          )}
+          {isLoginError && <Alert variant="danger">{isLoginError}</Alert>}
           <Button
             variant="outline-primary"
             type="button"
