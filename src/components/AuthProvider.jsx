@@ -7,8 +7,8 @@ function AuthProvider({ children }) {
   const [isAuthLoading, setIsAuthLoading] = useState(true);
 
   async function onLogin(email, pwd) {
-    const user = await login(email, pwd);
-    setActiveUser(user);
+    const responseData = await login(email, pwd);
+    setActiveUser(responseData.user);
   }
 
   function onLogout() {
@@ -16,9 +16,9 @@ function AuthProvider({ children }) {
   }
 
   async function onSignUp(signUpDataObj) {
-    const response = await signup(signUpDataObj);
-    if (response.status === "ok") setActiveUser(response.user);
-    return response;
+    const responseData = await signup(signUpDataObj);
+    if (responseData.status === "ok") setActiveUser(responseData.user);
+    return responseData;
   }
 
   return (

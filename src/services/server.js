@@ -5,14 +5,17 @@ const api = axios.create({
 
 async function signup(signUpDataObj) {
   const response = await api.post("/auth/signup", signUpDataObj);
-  console.log(response);
   return response.data;
 }
 
 async function login(email, password) {
   const response = await api.post("/auth/login", { email, password });
-  console.log(response);
   return response.data;
 }
 
-export { signup, login };
+async function addScore(scoreObj) {
+  const response = await api.post("/score/add", scoreObj);
+  return response.data;
+}
+
+export { signup, login, addScore };

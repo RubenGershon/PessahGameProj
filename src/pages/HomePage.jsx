@@ -1,17 +1,15 @@
 import React, { useContext } from "react";
 import { Alert, Button, Row, Col, Container } from "react-bootstrap";
-// import { useAuth } from "../components/AuthProvider";
 import AuthContext from "../contexts/AuthContext";
 
 
 function HomePage() {
   const {activeUser} = useContext(AuthContext);
-  console.log(activeUser)
   return (
     <>
     <Container>
       <Alert variant="info">
-        Hi {activeUser.user[0].nickname}, the last time you played you received a score of
+        Hi {activeUser.nickname}, the last time you played you received a score of
         1610305 and your higher score is 101513213!!
       </Alert>
       <Alert variant="info">
@@ -37,10 +35,6 @@ function HomePage() {
         <Col><div className="imgTest header text spaceInvaders"></div></Col>
         <Col><div className="imgTest header text mario"></div></Col>
       </Row>
-    
-      
-      
-      
       </Container>
     </>
   );

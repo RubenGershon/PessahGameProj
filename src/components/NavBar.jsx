@@ -17,6 +17,23 @@ function NavBar() {
             </>
           )}
         </Nav>
+        <Nav className="me-auto">
+          {activeUser && (
+            <>
+              <Nav.Link to="/game" as={NavLink}>
+                Game
+              </Nav.Link>
+            </>
+          )}
+        </Nav>
+        <Nav className="me-auto">
+          {activeUser && (
+            <>
+              <Nav.Link to="/play" as={NavLink}>
+              </Nav.Link>
+            </>
+          )}
+        </Nav>
         <Nav className="ms-auto">
           {!activeUser && (
             <Nav.Link to="#" as={NavLink}>

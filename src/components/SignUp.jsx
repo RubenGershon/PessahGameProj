@@ -43,7 +43,6 @@ function SignUp({ closeModal }) {
         closeModal();
       }
     } catch (err) {
-      console.log(err.response.data);
       setSignUpErr(err.response.data.message);
     }
   }

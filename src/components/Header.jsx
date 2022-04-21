@@ -1,39 +1,32 @@
 import React, { useContext, useState } from "react";
 import "../scss/header.scss";
-import { Button } from "react-bootstrap";
-import axios from "axios";
+import { Alert, Button } from "react-bootstrap";
 import AuthContext from "../contexts/AuthContext";
+import { addScore } from "../services/server";
 
-
-const Header = ({ score }) => {
+function Header({ score }) {
   const [sendScoreButton, setSendScoreButton] = useState(false);
   const [recentScore, setRecentScore] = useState([]);
   // const [scoreGame, setScoreGame] = useState(0)
   const { activeUser } = useContext(AuthContext);
-  const sendScore = (score) => {
-    let newScore = {
-      email: activeUser.user[0].email,
-      score: score,
-    };
-    // activeUser.user[0].nickname}
-    console.log(email)
-    console.log(activeUser)
-    console.log(score)
-    axios
-      .post("http://localhost:8080/score/add", newScore)
-      .then((res) => {
-        if (res) {
-          setRecentScore(score);
-          // getHighScore(activeUser.email);
-          alert("Score Sent");
-        }
-      });
-  };
+  const [addScoreError, setAddScoreError] = useState(false);
 
-  const handleSendScore = () => {
-    sendScore(score);
+  async function handleSendScore() {
+    console.log(activeUser);
+    setAddScoreError(false);
+    let newScore = {
+      email: activeUser.email,
+      score: score,
+      game: "rock-paper-scissors",
+    };
+    try {
+      await addScore(newScore);
+    } catch (err) {
+      //console.log(err.response.data);
+      setAddScoreError(err.response.data.message);
+    }
     setSendScoreButton(false);
-  };
+  }
 
   return (
     <div className="header">
@@ -42,6 +35,7 @@ const Header = ({ score }) => {
         <span>Paper</span>
         <span>Scissors</span>
         <Button onClick={handleSendScore}> Send Score </Button>
+        <Alert variant="danger">{addScoreError}</Alert>
       </div>
       <div className="score-box">
         <span>Score</span>
@@ -49,6 +43,6 @@ const Header = ({ score }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Header;

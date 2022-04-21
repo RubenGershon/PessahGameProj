@@ -21,7 +21,6 @@ function WelcomePage() {
       await onLogin(email, pwd);
       navigate("/home");
     } catch (err) {
-      console.log(err.response.data);
       setIsLoginError(err.response.data.message);
     } finally {
       setIsLoggingIn(false);
