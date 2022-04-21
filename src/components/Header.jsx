@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../scss/header.scss";
 import { Button } from "react-bootstrap";
 import AuthContext from "../contexts/AuthContext";
@@ -30,13 +30,21 @@ function Header({ score }) {
     setSendScoreButton(false);
   }
 
+  
+useEffect(() => {
+  if(score >= 20 ) {
+      setSendScoreButton(true)
+  }
+}, [score])
+
+
   return (
     <div className="header">
       <div className="text">
         <span>Rock</span>
         <span>Paper</span>
         <span>Scissors</span>
-        <Button className="mt-4" onClick={handleSendScore}> End Game </Button>
+        {sendScoreButton && <Button className="mt-4" onClick={handleSendScore}> End Game </Button>}
       </div>
       <div className="score-box">
         <span>Score</span>

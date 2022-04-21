@@ -18,4 +18,5 @@ async function addScore(scoreObj) {
   return response.data;
 }
 
+
 export { signup, login, addScore };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Triangle from "../images/bg-triangle.svg";
 import "../scss/play.scss";
@@ -7,12 +7,12 @@ import "../scss/game.scss";
 import { Container } from "react-bootstrap";
 
 
-const Play = ({ setMyChoice }) => {
+const Play = ({ setMyChoice  }) => {
   const setChoice = (e) => {
     setMyChoice(e.target.dataset.id);
   };
 
-  
+ 
   return (
       <Container>
     <div className="text title">

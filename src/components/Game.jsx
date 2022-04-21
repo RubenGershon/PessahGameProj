@@ -8,7 +8,7 @@ import Header from "./Header";
 function Game({ score, setScore, myChoice }) {
   const [house, setHouse] = useState("");
   const [playerWin, setPlayerWin] = useState("");
-  const [counter, setCounter] = useState(3);
+  const [counter, setCounter] = useState(1);
   const [attempt, setAttempt] = useState(null);
   const [attemptButton, sendAttemptButton] = useState(false);
   const [sendScore, setSendScore] = useState();
@@ -22,10 +22,19 @@ function Game({ score, setScore, myChoice }) {
     newHousePick();
   }, []);
 
+  useEffect(() => {
+    if (score < 20) {
+      newHousePick();
+    } else {
+      newHousePick();
+      setScore(0);
+    }
+  }, []);
+
   const Result = () => {
     if (myChoice === "rock" && house === "scissors") {
       setPlayerWin("win");
-      setScore(score + 5);
+      setScore(score + 10);
       setAttempt(attempt + 1);
     } else if (myChoice === "rock" && house === "paper") {
       setPlayerWin("lose");
@@ -33,7 +42,7 @@ function Game({ score, setScore, myChoice }) {
       setAttempt(attempt + 1);
     } else if (myChoice === "scissors" && house === "paper") {
       setPlayerWin("win");
-      setScore(score + 5);
+      setScore(score + 10);
       setAttempt(attempt + 1);
     } else if (myChoice === "scissors" && house === "rock") {
       setPlayerWin("lose");
@@ -41,7 +50,7 @@ function Game({ score, setScore, myChoice }) {
       setAttempt(attempt + 1);
     } else if (myChoice === "paper" && house === "rock") {
       setPlayerWin("win");
-      setScore(score + 5);
+      setScore(score + 10);
       setAttempt(attempt + 1);
     } else if (myChoice === "paper" && house === "scissors") {
       setPlayerWin("lose");
@@ -65,28 +74,6 @@ function Game({ score, setScore, myChoice }) {
       clearInterval(timer);
     };
   }, [counter, house]);
-
-  // useEffect(() => {
-  //   if (attempts === 5 ) {
-  //     sendAttemptButton(true)
-  //   }
-  // })
-
-  // function handleScore(score) {
-  //   let newScore = {
-  //     email: activeUser.email,
-  //     score: score
-  //   }
-  //   axios.post("http://localhost:8080/add", newScore)
-  //     .then((res) => {
-  //       if(res) {
-  //         setRecentScore(score);
-  //         getHighScore(activeUser.email);
-  //         alert("Score sent")
-  //       }
-  //     })
-
-  // }
 
   return (
     <Container>

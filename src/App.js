@@ -34,7 +34,7 @@ function App() {
             path="/game"
             element={
               <ProtectedRoute>
-                <Play setMyChoice={setMyChoice} />
+                <Play setMyChoice={setMyChoice}/>
               </ProtectedRoute>
             }
           />
