@@ -18,5 +18,18 @@ async function addScore(scoreObj) {
   return response.data;
 }
 
+async function getLastScore(email) {
+  const response = await api.get("/score/lastScore", {
+    params: { userEmail: email },
+  });
+  return response.data;
+}
 
-export { signup, login, addScore };
+async function getHighestScore(email) {
+  const response = await api.get("/score/highScore", {
+    params: { userEmail: email },
+  });
+  return response.data;
+}
+
+export { signup, login, addScore, getLastScore, getHighestScore };

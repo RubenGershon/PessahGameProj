@@ -1,17 +1,33 @@
-import React, { useContext } from "react";
-import { Alert, Button, Row, Col, Container } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Alert, Row, Col, Container } from "react-bootstrap";
 import AuthContext from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { getLastScore, getHighestScore } from "../services/server.js";
 
 function HomePage() {
   const { activeUser } = useContext(AuthContext);
+  const [lastScore, setLastScore] = useState(0);
+  const [highestScore, setHighestScore] = useState(0);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function getUserLastScore() {
+      const response = await getLastScore(activeUser.email);
+      setLastScore(response.lastScore.score);
+    }
+    async function getUserHighestScore() {
+      const response = await getHighestScore(activeUser.email);
+      setHighestScore(response.highestScore.score);
+    }
+    getUserLastScore();
+    getUserHighestScore();
+  }, []);
   return (
     <>
       <Container>
         <Alert variant="info">
           Hi {activeUser.nickname}, the last time you played you received a
-          score of 1610305 and your higher score is 101513213!!
+          score of {lastScore} and your higher score is {highestScore}!!
         </Alert>
         <Row className="justify-content-md-center">
           <Col xs lg="5 px-5">
