@@ -4,11 +4,8 @@ import { Link } from "react-router-dom";
 import "../scss/game.scss";
 import "../scss/header.scss";
 import Header from "./Header";
-// import { useAuth } from "./AuthProvider"
-// import { Alert } from "react-bootstrap";
 
 function Game({ score, setScore, myChoice }) {
-  // const {activeUser} = useAuth();
   const [house, setHouse] = useState("");
   const [playerWin, setPlayerWin] = useState("");
   const [counter, setCounter] = useState(3);

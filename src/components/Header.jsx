@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import "../scss/header.scss";
-import { Alert, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import AuthContext from "../contexts/AuthContext";
 import { addScore } from "../services/server";
+import { useNavigate } from "react-router-dom";
 
 function Header({ score }) {
   const [sendScoreButton, setSendScoreButton] = useState(false);
@@ -10,6 +11,7 @@ function Header({ score }) {
   // const [scoreGame, setScoreGame] = useState(0)
   const { activeUser } = useContext(AuthContext);
   const [addScoreError, setAddScoreError] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSendScore() {
     console.log(activeUser);
@@ -21,8 +23,8 @@ function Header({ score }) {
     };
     try {
       await addScore(newScore);
+      navigate("/game");
     } catch (err) {
-      //console.log(err.response.data);
       setAddScoreError(err.response.data.message);
     }
     setSendScoreButton(false);
@@ -34,8 +36,7 @@ function Header({ score }) {
         <span>Rock</span>
         <span>Paper</span>
         <span>Scissors</span>
-        <Button onClick={handleSendScore}> Send Score </Button>
-        <Alert variant="danger">{addScoreError}</Alert>
+        <Button className="mt-4" onClick={handleSendScore}> End Game </Button>
       </div>
       <div className="score-box">
         <span>Score</span>
