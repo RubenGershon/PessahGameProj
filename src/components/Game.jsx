@@ -143,10 +143,10 @@ const Game = ({ score, setScore, myChoice, }) => {
           <div className="counter">{counter}</div>
         )}
       </div>
-      <Button>Send High Score</Button>
 
    
     </div>
+     
     </Container>
   )
 }

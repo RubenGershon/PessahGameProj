@@ -12,6 +12,7 @@ const Play = ({ setMyChoice }) => {
     setMyChoice(e.target.dataset.id);
   };
 
+  
   return (
       <Container>
     <div className="text title">
@@ -44,6 +45,7 @@ const Play = ({ setMyChoice }) => {
             className="icon icon--rock"
           ></div>
         </Link>
+        
       </div>
     </div>
     </Container>
