@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Alert, Button, Form } from "react-bootstrap";
-import { displaySignUpError } from "../lib/utils";
 import AuthContext from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -9,26 +8,28 @@ function SignUp({ closeModal }) {
   const [firstName, setFirstName] = useState("");
   const [nickName, setnickName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPwd] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [signUpErr, setSignUpErr] = useState("");
   const navigate = useNavigate();
 
   async function onSignUpWrapper() {
-    const response = await onSignUp({
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      password,
-    });
-    if (response.status === "ok") {
-      navigate("/home");
-      closeModal();
-    } else {
-      setSignUpErr(response.message);
+    try {
+      const response = await onSignUp({
+        first_name: firstName,
+        last_name: lastName,
+        nickname: nickName,
+        email,
+        password,
+      });
+      if (response.status === "ok") {
+        navigate("/home");
+        closeModal();
+      }
+    } catch (err) {
+      console.log(err.response.data);
+      setSignUpErr(err.response.data.message);
     }
   }
 
@@ -75,16 +76,6 @@ function SignUp({ closeModal }) {
             We'll never share your email with anyone else.
           </Form.Text>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Phone Number</Form.Label>
-          <Form.Control
-            type="tel"
-            placeholder="Enter your phone number"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-          />
-        </Form.Group>
-
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -104,7 +95,7 @@ function SignUp({ closeModal }) {
           />
         </Form.Group>
         {signUpErr && (
-          <Alert variant="danger">{displaySignUpError(signUpErr)}</Alert>
+          <Alert variant="danger">{signUpErr}</Alert>
         )}
         <Button
           variant="outline-primary"

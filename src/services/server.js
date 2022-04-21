@@ -4,11 +4,15 @@ const api = axios.create({
 });
 
 async function signup(signUpDataObj) {
-  console.log("SignedIn!!");
+  const response = await api.post("/auth/signup", signUpDataObj);
+  console.log(response);
+  return response.data;
 }
 
 async function login(email, password) {
-  console.log("LoggedIn!!");
+  const response = await api.post("/auth/login", { email, password });
+  console.log(response);
+  return response.data;
 }
 
 export { signup, login };

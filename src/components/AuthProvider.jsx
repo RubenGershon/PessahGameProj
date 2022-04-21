@@ -6,8 +6,8 @@ function AuthProvider({ children }) {
   const [activeUser, setActiveUser] = useState("");
   const [isAuthLoading, setIsAuthLoading] = useState(true);
 
-  function onLogin(email, pwd) {
-    const user = login(email, pwd);
+  async function onLogin(email, pwd) {
+    const user = await login(email, pwd);
     setActiveUser(user);
   }
 

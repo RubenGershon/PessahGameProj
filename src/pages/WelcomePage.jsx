@@ -1,27 +1,34 @@
-import { Alert } from "bootstrap";
 import React, { useContext, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Form, Spinner } from "react-bootstrap";
 import { displayLoginError } from "../lib/utils";
 import AuthContext from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import "./welcomePage.css";
 import AuthModal from "../components/AuthModal";
 
-function WelcomePage({ closeModal }) {
+function WelcomePage() {
   const { onLogin } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
-
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
-  const [err, setErr] = useState("");
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [isLoginError, setIsLoginError] = useState(false);
   const navigate = useNavigate();
 
   async function handleLogin() {
-    onLogin();
-    console.log("LoggedIn");
-    navigate("/home");
-    closeModal();
+    setIsLoginError(false);
+    setIsLoggingIn(true);
+    try {
+      await onLogin(email, pwd);
+      navigate("/home");
+    } catch (err) {
+      console.log(err);
+      setIsLoginError(true);
+    } finally {
+      setIsLoggingIn(false);
+    }
   }
+
   return (
     <div id="welcome-page">
       <div id="left-side">
@@ -50,9 +57,19 @@ function WelcomePage({ closeModal }) {
               onChange={(e) => setPwd(e.target.value)}
             />
           </Form.Group>
-          {err && <Alert variant="danger">{displayLoginError(err)}</Alert>}
-          <Button variant="outline-primary" type="button" onClick={handleLogin}>
-            Login with email & password
+          {isLoginError && (
+            <Alert variant="danger">
+              Login error! Incorrect username or password
+            </Alert>
+          )}
+          <Button
+            variant="outline-primary"
+            type="button"
+            onClick={handleLogin}
+            disabled={isLoggingIn}
+          >
+            Login with email & password{" "}
+            {isLoggingIn && <Spinner animation="border" size="sm" />}
           </Button>
           - or-
           <Button
