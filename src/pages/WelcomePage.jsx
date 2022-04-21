@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Alert, Button, Form, Spinner } from "react-bootstrap";
-import { displayLoginError } from "../lib/utils";
 import AuthContext from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import "./welcomePage.css";
@@ -37,7 +36,7 @@ function WelcomePage() {
       <div id="right-side">
         <Form id="form">
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label style={{ color: "white" }}>Email address</Form.Label>
             <Form.Control
               type="email"
               placeholder="Enter email"
@@ -49,7 +48,7 @@ function WelcomePage() {
             </Form.Text>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label style={{ color: "white" }}>Password</Form.Label>
             <Form.Control
               type="password"
               placeholder="Password"

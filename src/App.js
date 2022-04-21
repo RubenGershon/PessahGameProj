@@ -1,5 +1,4 @@
 import HomePage from "./pages/HomePage";
-import Profile from "./pages/Profile";
 import NavBar from "./components/NavBar";
 import WelcomePage from "./pages/WelcomePage";
 import GamesPage from "./pages/GamesPage";
@@ -9,7 +8,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AuthProvider from "./components/AuthProvider";
 import React, { useState } from "react";
 import Play from "./components/Play";
-import Header from "./components/Header";
 import Game from "./components/Game";
 
 function App() {
@@ -20,7 +18,7 @@ function App() {
     <div style={{ height: "100%" }}>
       <AuthProvider>
         <NavBar />
-         {/* <Header score={score} /> */}
+        {/* <Header score={score} /> */}
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route
@@ -31,12 +29,12 @@ function App() {
               </ProtectedRoute>
             }
           />
-     
+
           <Route
             path="/game"
             element={
               // <ProtectedRoute>
-                 <Play setMyChoice={setMyChoice}/>
+              <Play setMyChoice={setMyChoice} />
               // </ProtectedRoute>
             }
           />
@@ -44,16 +42,8 @@ function App() {
             path="/play"
             element={
               // <ProtectedRoute>
-                <Game myChoice={myChoice} score={score} setScore={setScore}/>
+              <Game myChoice={myChoice} score={score} setScore={setScore} />
               // </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
             }
           />
           <Route path="*" element={<NotFoundPage />} />
