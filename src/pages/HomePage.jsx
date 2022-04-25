@@ -13,11 +13,13 @@ function HomePage() {
   useEffect(() => {
     async function getUserLastScore() {
       const response = await getLastScore(activeUser.email);
-      setLastScore(response.lastScore.score);
+      if (response.lastScore) setLastScore(response.lastScore.score);
+      else setLastScore(0)
     }
     async function getUserHighestScore() {
       const response = await getHighestScore(activeUser.email);
-      setHighestScore(response.highestScore.score);
+      if (response.highestScore) setHighestScore(response.highestScore.score);
+      else setHighestScore(0)
     }
     getUserLastScore();
     getUserHighestScore();
